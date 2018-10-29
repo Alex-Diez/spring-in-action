@@ -8,11 +8,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest
+@WebMvcTest(OrderController.class)
 class OrderControllerTest {
   @Autowired
   private MockMvc mockMvc;
@@ -26,11 +27,29 @@ class OrderControllerTest {
             .param("city", "address city")
             .param("state", "NY")
             .param("zip", "10001")
-            .param("ccNumber", "1234567890123456")
+            .param("ccNumber", "5555555555554444")
+            .param("ccExpiration", "10/21")
+            .param("ccCVV", "123")
+    )
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/"));
+  }
+
+  @Test
+  void processTacoOrder_blankName_shouldNotPassValidation() throws Exception {
+    mockMvc.perform(
+        post("/orders")
+            .param("name", "")
+            .param("street", "address street")
+            .param("city", "address city")
+            .param("state", "NY")
+            .param("zip", "10001")
+            .param("ccNumber", "5555555555554444")
             .param("ccExpiration", "10/21")
             .param("ccCVV", "123")
     )
         .andExpect(status().isOk())
-        .andExpect(view().name("orderForm"));
+        .andExpect(view().name("orderForm"))
+        .andExpect(model().attributeHasFieldErrors("modifiableOrder", "name"));
   }
 }

@@ -40,17 +40,17 @@ public class DesignTacoController {
         ingredients.stream()
             .collect(Collectors.groupingBy(Ingredient::key))
     );
-    model.addAttribute("taco", new Taco());
+    model.addAttribute("modifiableTaco", new ModifiableTaco());
 
     return "design";
   }
 
   @PostMapping
-  public String processDesign(@Valid Taco taco, Errors errors) {
+  public String processDesign(@Valid ModifiableTaco modifiableTaco, Errors errors, Model model) {
     if (errors.hasErrors()) {
       return "design";
     }
-    log.info("Processing: " + taco);
+    log.info("Processing: " + modifiableTaco);
     return "redirect:/orders/current";
   }
 }

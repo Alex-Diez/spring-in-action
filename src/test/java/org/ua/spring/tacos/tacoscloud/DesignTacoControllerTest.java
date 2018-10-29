@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest
+@WebMvcTest(DesignTacoController.class)
 class DesignTacoControllerTest {
   @Autowired
   private MockMvc mockMvc;
@@ -48,6 +48,6 @@ class DesignTacoControllerTest {
     )
         .andExpect(status().isOk())
         .andExpect(view().name("design"))
-        .andExpect(model().attributeHasFieldErrors("taco", "name"));
+        .andExpect(model().attributeHasFieldErrors("modifiableTaco", "name"));
   }
 }
