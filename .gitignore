@@ -125,3 +125,5 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+# JEnv local settings 
+.java-version
