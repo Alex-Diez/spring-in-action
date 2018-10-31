@@ -1,4 +1,4 @@
-package org.ua.spring.tacos.tacoscloud;
+package org.ua.spring.tacos.tacoscloud.domain;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.immutables.value.Value;

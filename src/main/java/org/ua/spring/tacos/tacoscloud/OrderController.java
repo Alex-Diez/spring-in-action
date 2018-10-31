@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.ua.spring.tacos.tacoscloud.domain.ModifiableOrder;
 
 import javax.validation.Valid;
 

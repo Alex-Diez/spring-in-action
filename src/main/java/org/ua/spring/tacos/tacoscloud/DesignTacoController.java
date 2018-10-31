@@ -8,7 +8,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.ua.spring.tacos.tacoscloud.Ingredient.Type;
+import org.ua.spring.tacos.tacoscloud.domain.ImmutableIngredient;
+import org.ua.spring.tacos.tacoscloud.domain.Ingredient;
+import org.ua.spring.tacos.tacoscloud.domain.Ingredient.Type;
+import org.ua.spring.tacos.tacoscloud.domain.ModifiableTaco;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.ua.spring.tacos.tacoscloud;
+package org.ua.spring.tacos.tacoscloud.domain;
 
 import org.immutables.value.Value;
 import org.immutables.value.Value.Style.ValidationMethod;
@@ -9,7 +9,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Value.Modifiable
-@Value.Style(beanFriendlyModifiables = true, create = "new", validationMethod = ValidationMethod.VALIDATION_API)
+@Value.Style(
+    beanFriendlyModifiables = true,
+    create = "new",
+    validationMethod = ValidationMethod.VALIDATION_API
+)
 public abstract class Taco {
   @Value.Parameter
   @NotNull

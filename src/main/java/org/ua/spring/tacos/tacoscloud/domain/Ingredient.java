@@ -1,4 +1,4 @@
-package org.ua.spring.tacos.tacoscloud;
+package org.ua.spring.tacos.tacoscloud.domain;
 
 import org.immutables.value.Value;
 
@@ -15,7 +15,7 @@ public abstract class Ingredient {
 
   public abstract Type getType();
 
-  enum Type {
+  public enum Type {
     WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
   }
 }
