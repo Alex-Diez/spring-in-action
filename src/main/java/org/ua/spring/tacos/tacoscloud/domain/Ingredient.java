@@ -1,19 +1,31 @@
 package org.ua.spring.tacos.tacoscloud.domain;
 
-import org.immutables.value.Value;
+public class Ingredient {
+  private final String id;
+  private final String name;
+  private final Type type;
 
-@Value.Immutable
-public abstract class Ingredient {
+  public Ingredient(String id, String name, Type type) {
+    this.id = id;
+    this.name = name;
+    this.type = type;
+  }
 
   public String key() {
     return getType().toString().toLowerCase();
   }
 
-  public abstract String getId();
+  public String getId() {
+    return id;
+  }
 
-  public abstract String getName();
+  public String getName() {
+    return name;
+  }
 
-  public abstract Type getType();
+  public Type getType() {
+    return type;
+  }
 
   public enum Type {
     WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE

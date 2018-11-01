@@ -8,7 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.ua.spring.tacos.tacoscloud.domain.ModifiableOrder;
+import org.ua.spring.tacos.tacoscloud.domain.Order;
 
 import javax.validation.Valid;
 
@@ -19,16 +19,16 @@ public class OrderController {
 
   @GetMapping("/current")
   public String orderForm(Model model) {
-    model.addAttribute("modifiableOrder", new ModifiableOrder());
+    model.addAttribute("modifiableOrder", new Order());
     return "orderForm";
   }
 
   @PostMapping
-  public String processOrder(@Valid ModifiableOrder modifiableOrder, Errors errors, Model model) {
+  public String processOrder(@Valid Order order, Errors errors, Model model) {
     if (errors.hasErrors()) {
       return "orderForm";
     }
-    log.info("Order submitted: " + modifiableOrder);
+    log.info("Order submitted: " + order);
     return "redirect:/";
   }
 }

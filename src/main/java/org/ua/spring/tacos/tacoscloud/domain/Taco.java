@@ -1,33 +1,74 @@
 package org.ua.spring.tacos.tacoscloud.domain;
 
-import org.immutables.value.Value;
-import org.immutables.value.Value.Style.ValidationMethod;
-
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Value.Modifiable
-@Value.Style(
-    beanFriendlyModifiables = true,
-    create = "new",
-    validationMethod = ValidationMethod.VALIDATION_API
-)
-public abstract class Taco {
-  @Value.Parameter
+public class Taco {
   @NotNull
   @Size(
       min = 5,
       message = "Name must be at least 5 characters long"
   )
-  public abstract String getName();
-
-  @Value.Parameter
+  private String name;
   @NotNull
   @Size(
       min = 1,
       message = "You must choose at least 1 ingredient"
   )
-  public abstract List<String> getIngredients();
+  private final List<String> ingredients = new ArrayList<String>();
+
+  public Taco() {
+  }
+
+  public Taco(
+      @NotNull @Size(
+          min = 5,
+          message = "Name must be at least 5 characters long"
+      ) String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public List<String> getIngredients() {
+    return new ArrayList<>(ingredients);
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setIngredients(Collection<String> ingredients) {
+    this.ingredients.clear();
+    this.ingredients.addAll(ingredients);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Taco taco = (Taco) o;
+    return Objects.equals(getName(), taco.getName()) &&
+        Objects.equals(getIngredients(), taco.getIngredients());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getName(), getIngredients());
+  }
+
+  @Override
+  public String toString() {
+    return "Taco{" +
+        "name='" + name + '\'' +
+        ", ingredients=" + ingredients +
+        '}';
+  }
 }

@@ -3,7 +3,6 @@ package org.ua.spring.tacos.tacoscloud.domain.validation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.ua.spring.tacos.tacoscloud.domain.Ingredient;
-import org.ua.spring.tacos.tacoscloud.domain.ModifiableTaco;
 import org.ua.spring.tacos.tacoscloud.domain.Taco;
 
 import java.util.List;
@@ -39,21 +38,23 @@ class TacoValidationTest {
 
   @Test
   void takoShouldHaveNameLonger_thanFourChars() throws Exception {
-    Taco taco = new ModifiableTaco(LONG_ENOUGH_TACO_NAME, NONEMPTY_INGREDIENTS);
+    Taco taco = new Taco(LONG_ENOUGH_TACO_NAME);
+    taco.setIngredients(NONEMPTY_INGREDIENTS);
 
     assertThat(validationMessages(taco)).isEmpty();
   }
 
   @Test
   void takoShouldBeInvalid_whenIngredientListIsEmpty() throws Exception {
-    Taco taco = new ModifiableTaco(LONG_ENOUGH_TACO_NAME, List.of());
+    Taco taco = new Taco(LONG_ENOUGH_TACO_NAME);
 
     assertThat(validationMessages(taco)).containsOnly("You must choose at least 1 ingredient");
   }
 
   @Test
   void takoShouldBeInvalid_whenNameShorterThanFourChars() throws Exception {
-    Taco taco = new ModifiableTaco(SHORT_TACO_NAME, NONEMPTY_INGREDIENTS);
+    Taco taco = new Taco(SHORT_TACO_NAME);
+    taco.setIngredients(NONEMPTY_INGREDIENTS);
 
     assertThat(validationMessages(taco)).containsOnly("Name must be at least 5 characters long");
   }

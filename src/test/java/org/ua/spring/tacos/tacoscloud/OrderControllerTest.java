@@ -50,6 +50,6 @@ class OrderControllerTest {
     )
         .andExpect(status().isOk())
         .andExpect(view().name("orderForm"))
-        .andExpect(model().attributeHasFieldErrors("modifiableOrder", "name"));
+        .andExpect(model().attributeHasFieldErrors("order", "name"));
   }
 }
