@@ -18,9 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class TacoValidationTest {
 
-  private static final String LONG_ENOUGH_TACO_NAME = "long enough name";
-  private static final String SHORT_TACO_NAME = "shrt";
-  private static final List<String> NONEMPTY_INGREDIENTS = List.of(Ingredient.Type.CHEESE.toString());
+  private static final String longEnoughTacoName = "long enough name";
+  private static final String shortTacoName = "shrt";
+  private static final List<String> nonemptyIngredients = List.of(Ingredient.Type.CHEESE.toString());
+
   private Validator validator;
 
   @BeforeEach
@@ -38,23 +39,24 @@ class TacoValidationTest {
 
   @Test
   void takoShouldHaveNameLonger_thanFourChars() throws Exception {
-    Taco taco = new Taco(LONG_ENOUGH_TACO_NAME);
-    taco.setIngredients(NONEMPTY_INGREDIENTS);
+    Taco taco = new Taco(longEnoughTacoName);
+    taco.setIngredients(nonemptyIngredients);
 
     assertThat(validationMessages(taco)).isEmpty();
   }
 
   @Test
   void takoShouldBeInvalid_whenIngredientListIsEmpty() throws Exception {
-    Taco taco = new Taco(LONG_ENOUGH_TACO_NAME);
+    Taco taco = new Taco(longEnoughTacoName);
+    taco.setIngredients(List.of());
 
     assertThat(validationMessages(taco)).containsOnly("You must choose at least 1 ingredient");
   }
 
   @Test
   void takoShouldBeInvalid_whenNameShorterThanFourChars() throws Exception {
-    Taco taco = new Taco(SHORT_TACO_NAME);
-    taco.setIngredients(NONEMPTY_INGREDIENTS);
+    Taco taco = new Taco(shortTacoName);
+    taco.setIngredients(nonemptyIngredients);
 
     assertThat(validationMessages(taco)).containsOnly("Name must be at least 5 characters long");
   }

@@ -48,6 +48,6 @@ class DesignTacoControllerTest {
     )
         .andExpect(status().isOk())
         .andExpect(view().name("design"))
-        .andExpect(model().attributeHasFieldErrors("taco", "name"));
+        .andExpect(model().attributeHasFieldErrors("taco", "name.value"));
   }
 }

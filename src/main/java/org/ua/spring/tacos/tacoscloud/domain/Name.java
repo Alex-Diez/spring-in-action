@@ -2,7 +2,15 @@ package org.ua.spring.tacos.tacoscloud.domain;
 
 import java.util.Objects;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Name {
+  @NotNull
+  @Size(
+      min = 5,
+      message = "Name must be at least 5 characters long"
+  )
   private final String value;
 
   public Name(String value) {
