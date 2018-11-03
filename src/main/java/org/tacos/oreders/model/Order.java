@@ -1,4 +1,4 @@
-package org.ua.spring.tacos.tacoscloud.domain;
+package org.tacos.oreders.model;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 

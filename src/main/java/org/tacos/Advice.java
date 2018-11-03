@@ -1,4 +1,4 @@
-package org.ua.spring.tacos.tacoscloud;
+package org.tacos;
 
 import org.springframework.validation.DataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;

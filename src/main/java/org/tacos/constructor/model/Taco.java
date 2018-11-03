@@ -1,4 +1,6 @@
-package org.ua.spring.tacos.tacoscloud.domain;
+package org.tacos.constructor.model;
+
+import org.tacos.common.model.values.Name;
 
 import java.util.ArrayList;
 import java.util.Collection;

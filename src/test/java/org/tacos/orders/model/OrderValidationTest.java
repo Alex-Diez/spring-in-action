@@ -1,7 +1,7 @@
-package org.ua.spring.tacos.tacoscloud.domain.validation;
+package org.tacos.orders.model;
 
 import org.junit.jupiter.api.Test;
-import org.ua.spring.tacos.tacoscloud.domain.Order;
+import org.tacos.oreders.model.Order;
 
 import java.util.Set;
 import java.util.stream.Collectors;

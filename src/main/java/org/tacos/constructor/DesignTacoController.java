@@ -1,4 +1,4 @@
-package org.ua.spring.tacos.tacoscloud;
+package org.tacos.constructor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,9 +8,9 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.ua.spring.tacos.tacoscloud.domain.Ingredient;
-import org.ua.spring.tacos.tacoscloud.domain.Ingredient.Type;
-import org.ua.spring.tacos.tacoscloud.domain.Taco;
+import org.tacos.constructor.model.Taco;
+import org.tacos.constructor.model.Ingredient;
+import org.tacos.constructor.model.Ingredient.Type;
 
 import java.util.Arrays;
 import java.util.List;

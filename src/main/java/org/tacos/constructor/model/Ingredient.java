@@ -1,4 +1,4 @@
-package org.ua.spring.tacos.tacoscloud.domain;
+package org.tacos.constructor.model;
 
 public class Ingredient {
   private final String id;

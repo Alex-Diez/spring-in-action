@@ -1,4 +1,4 @@
-package org.ua.spring.tacos.tacoscloud;
+package org.tacos.oreders;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.ua.spring.tacos.tacoscloud.domain.Order;
+import org.tacos.oreders.model.Order;
 
 import javax.validation.Valid;
 

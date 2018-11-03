@@ -1,4 +1,4 @@
-package org.ua.spring.tacos.tacoscloud.domain;
+package org.tacos.common.model.values;
 
 import java.util.Objects;
 

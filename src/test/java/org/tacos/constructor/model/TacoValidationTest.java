@@ -1,9 +1,9 @@
-package org.ua.spring.tacos.tacoscloud.domain.validation;
+package org.tacos.constructor.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.ua.spring.tacos.tacoscloud.domain.Ingredient;
-import org.ua.spring.tacos.tacoscloud.domain.Taco;
+import org.tacos.constructor.model.Ingredient;
+import org.tacos.constructor.model.Taco;
 
 import java.util.List;
 import java.util.Set;
