@@ -1,38 +1,94 @@
 package org.tacos.orders.model;
 
 import org.junit.jupiter.api.Test;
+import org.tacos.ValidationTests;
+import org.tacos.oreders.model.Address;
 import org.tacos.oreders.model.Order;
-
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class OrderValidationTest {
+class OrderValidationTest extends ValidationTests {
+  private static final Address completeAddress = new Address("address street", "address city", "NY", "10001");
+  private static final Address addressWithBlankStreet = completeAddress.withStreet("");
+  private static final Address addressWithBlankCity = completeAddress.withCity("");
+  private static final Address addressWithBlankState = completeAddress.withState("");
+  private static final Address addressWithBlankZip = completeAddress.withZip("");
+
   @Test
   void orderShouldBeValid() throws Exception {
     Order order = new Order(
-        "person name",
-        "address street",
-        "address city",
-        "NY",
-        "10001",
+        "recipient name",
+        completeAddress,
         "5555555555554444",
         "10/21",
         "123"
     );
 
-    final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-    final Validator validator = validatorFactory.getValidator();
+    assertThat(validationMessages(order)).isEmpty();
+  }
 
-    final Set<ConstraintViolation<Order>> constraintViolations = validator.validate(order);
+  @Test
+  void orderIsInvalid_whenUsernameIsBlank() throws Exception {
+    Order order = new Order(
+        "",
+        completeAddress,
+        "5555555555554444",
+        "10/21",
+        "123"
+    );
 
-    assertThat(constraintViolations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet()))
-        .isEmpty();
+    assertThat(validationMessages(order)).containsOnly("Recipient name is required");
+  }
+
+  @Test
+  void orderIsInvalid_whenStreetIsBlank() throws Exception {
+    Order order = new Order(
+        "recipient name",
+        addressWithBlankStreet,
+        "5555555555554444",
+        "10/21",
+        "123"
+    );
+
+    assertThat(validationMessages(order)).containsOnly("Street is required");
+  }
+
+  @Test
+  void orderIsInvalid_whenCityIsBlank() throws Exception {
+    Order order = new Order(
+        "recipient name",
+        addressWithBlankCity,
+        "5555555555554444",
+        "10/21",
+        "123"
+    );
+
+    assertThat(validationMessages(order)).containsOnly("City is required");
+  }
+
+  @Test
+  void orderIsInvalid_whenStateIsBlank() throws Exception {
+    Order order = new Order(
+        "recipient name",
+        addressWithBlankState,
+        "5555555555554444",
+        "10/21",
+        "123"
+    );
+
+    assertThat(validationMessages(order)).containsOnly("State is required");
+  }
+
+  @Test
+  void orderIsInvalid_whenZipCodeIsBlank() throws Exception {
+    Order order = new Order(
+        "recipient name",
+        addressWithBlankZip,
+        "5555555555554444",
+        "10/21",
+        "123"
+    );
+
+    assertThat(validationMessages(order)).containsOnly("Zip code is required");
   }
 }

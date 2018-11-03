@@ -1,19 +1,19 @@
-package org.tacos.common.model.values;
+package org.tacos.constructor.model;
 
 import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class Name {
+public class TacoName {
   @NotNull
   @Size(
       min = 5,
-      message = "Name must be at least 5 characters long"
+      message = "TacoName must be at least 5 characters long"
   )
   private final String value;
 
-  public Name(String value) {
+  public TacoName(String value) {
     this.value = value;
   }
 
@@ -21,8 +21,8 @@ public class Name {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Name name = (Name) o;
-    return Objects.equals(value, name.value);
+    TacoName tacoName = (TacoName) o;
+    return Objects.equals(value, tacoName.value);
   }
 
   @Override

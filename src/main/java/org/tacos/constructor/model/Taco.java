@@ -1,7 +1,5 @@
 package org.tacos.constructor.model;
 
-import org.tacos.common.model.values.Name;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +11,7 @@ import javax.validation.constraints.Size;
 
 public class Taco {
   @Valid
-  private Name name;
+  private TacoName name;
   @NotNull
   @Size(
       min = 1,
@@ -24,12 +22,12 @@ public class Taco {
   public Taco() {
   }
 
-  public Taco(Name name) {
+  public Taco(TacoName name) {
     this.name = name;
   }
 
   public Taco(String name) {
-    this(new Name(name));
+    this(new TacoName(name));
   }
 
   public String getName() {
@@ -41,7 +39,7 @@ public class Taco {
   }
 
   public void setName(String name) {
-    this.name = new Name(name);
+    this.name = new TacoName(name);
   }
 
   public void setIngredients(Collection<String> ingredients) {

@@ -4,21 +4,24 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 public class Order {
-  @NotBlank(message = "Name is required")
+  @NotBlank(message = "Recipient name is required")
   private String name;
-  @NotBlank(message = "Street is required")
-  private String street;
-  @NotBlank(message = "City is required")
-  private String city;
-  @NotBlank(message = "State is required")
-  private String state;
-  @NotBlank(message = "Zip code is required")
-  private String zip;
+  @Valid
+  private Address address;
+//  @NotBlank(message = "Street is required")
+//  private String street;
+//  @NotBlank(message = "City is required")
+//  private String city;
+//  @NotBlank(message = "State is required")
+//  private String state;
+//  @NotBlank(message = "Zip code is required")
+//  private String zip;
   @CreditCardNumber(message = "Not a valid credit card number")
   private String ccNumber;
   @Pattern(
@@ -32,23 +35,25 @@ public class Order {
   public Order() {
   }
 
-  public Order(
-      @NotBlank(message = "Name is required") String name,
-      @NotBlank(message = "Street is required") String street,
-      @NotBlank(message = "City is required") String city,
-      @NotBlank(message = "State is required") String state,
-      @NotBlank(message = "Zip code is required") String zip,
+  public Order(String name, String street, String city,  String state, String zip,
       @CreditCardNumber(message = "Not a valid credit card number") String ccNumber,
       @Pattern(
           regexp = "^(0[1-9]|1[0-2])([/])([1-9][0-9])$",
           message = "Must be formatted MM/YY"
       ) String ccExpiration,
       @Digits(integer = 3, fraction = 0, message = "Invalid CVV") String ccCVV) {
+    this(name, new Address(street, city, state, zip), ccNumber, ccExpiration, ccCVV);
+  }
+
+  public Order(String name, Address address,
+               @CreditCardNumber(message = "Not a valid credit card number") String ccNumber,
+               @Pattern(
+                   regexp = "^(0[1-9]|1[0-2])([/])([1-9][0-9])$",
+                   message = "Must be formatted MM/YY"
+               ) String ccExpiration,
+               @Digits(integer = 3, fraction = 0, message = "Invalid CVV") String ccCVV) {
     this.name = name;
-    this.street = street;
-    this.city = city;
-    this.state = state;
-    this.zip = zip;
+    this.address = address;
     this.ccNumber = ccNumber;
     this.ccExpiration = ccExpiration;
     this.ccCVV = ccCVV;
@@ -63,35 +68,35 @@ public class Order {
   }
 
   public String getStreet() {
-    return street;
+    return address.street();
   }
 
   public void setStreet(String street) {
-    this.street = street;
+    address = address.withStreet(street);
   }
 
   public String getCity() {
-    return city;
+    return address.city();
   }
 
   public void setCity(String city) {
-    this.city = city;
+    address = address.withCity(city);
   }
 
   public String getState() {
-    return state;
+    return address.state();
   }
 
   public void setState(String state) {
-    this.state = state;
+    address = address.withState(state);
   }
 
   public String getZip() {
-    return zip;
+    return address.zip();
   }
 
   public void setZip(String zip) {
-    this.zip = zip;
+    address = address.withZip(zip);
   }
 
   public String getCcNumber() {
@@ -124,10 +129,7 @@ public class Order {
     if (o == null || getClass() != o.getClass()) return false;
     Order order = (Order) o;
     return Objects.equals(getName(), order.getName()) &&
-        Objects.equals(getStreet(), order.getStreet()) &&
-        Objects.equals(getCity(), order.getCity()) &&
-        Objects.equals(getState(), order.getState()) &&
-        Objects.equals(getZip(), order.getZip()) &&
+        Objects.equals(address, order.address) &&
         Objects.equals(getCcNumber(), order.getCcNumber()) &&
         Objects.equals(getCcExpiration(), order.getCcExpiration()) &&
         Objects.equals(getCcCVV(), order.getCcCVV());
@@ -137,10 +139,7 @@ public class Order {
   public int hashCode() {
     return Objects.hash(
         getName(),
-        getStreet(),
-        getCity(),
-        getState(),
-        getZip(),
+        address,
         getCcNumber(),
         getCcExpiration(),
         getCcCVV()
@@ -151,10 +150,7 @@ public class Order {
   public String toString() {
     return "Order{" +
         "name='" + name + '\'' +
-        ", street='" + street + '\'' +
-        ", city='" + city + '\'' +
-        ", state='" + state + '\'' +
-        ", zip='" + zip + '\'' +
+        ", address='" + address + '\'' +
         ", ccNumber='" + ccNumber + '\'' +
         ", ccExpiration='" + ccExpiration + '\'' +
         ", ccCVV='" + ccCVV + '\'' +

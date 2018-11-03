@@ -1,41 +1,17 @@
 package org.tacos.constructor.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.tacos.constructor.model.Ingredient;
-import org.tacos.constructor.model.Taco;
+import org.tacos.ValidationTests;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TacoValidationTest {
+class TacoValidationTest extends ValidationTests {
 
   private static final String longEnoughTacoName = "long enough name";
   private static final String shortTacoName = "shrt";
   private static final List<String> nonemptyIngredients = List.of(Ingredient.Type.CHEESE.toString());
-
-  private Validator validator;
-
-  @BeforeEach
-  void setUp() throws Exception {
-    ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-    validator = validatorFactory.getValidator();
-  }
-
-  private Set<String> validationMessages(Taco taco) {
-    return validator.validate(taco)
-        .stream()
-        .map(ConstraintViolation::getMessage)
-        .collect(Collectors.toSet());
-  }
 
   @Test
   void takoShouldHaveNameLonger_thanFourChars() throws Exception {
@@ -58,6 +34,6 @@ class TacoValidationTest {
     Taco taco = new Taco(shortTacoName);
     taco.setIngredients(nonemptyIngredients);
 
-    assertThat(validationMessages(taco)).containsOnly("Name must be at least 5 characters long");
+    assertThat(validationMessages(taco)).containsOnly("TacoName must be at least 5 characters long");
   }
 }
