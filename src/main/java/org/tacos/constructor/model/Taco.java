@@ -20,6 +20,7 @@ public class Taco {
   private final List<String> ingredients = new ArrayList<String>();
 
   public Taco() {
+    this("");
   }
 
   public Taco(TacoName name) {

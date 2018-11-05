@@ -34,6 +34,6 @@ class TacoValidationTest extends ValidationTests {
     Taco taco = new Taco(shortTacoName);
     taco.setIngredients(nonemptyIngredients);
 
-    assertThat(validationMessages(taco)).containsOnly("TacoName must be at least 5 characters long");
+    assertThat(validationMessages(taco)).containsOnly("Taco name must be at least 5 characters long");
   }
 }

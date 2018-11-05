@@ -23,14 +23,14 @@ class OrderControllerTest {
   void processOrder() throws Exception {
     mockMvc.perform(
         post("/orders")
-            .param("name", "person name")
+            .param("recipientName", "person name")
             .param("street", "address street")
             .param("city", "address city")
             .param("state", "NY")
             .param("zip", "10001")
-            .param("ccNumber", "5555555555554444")
-            .param("ccExpiration", "10/21")
-            .param("ccCVV", "123")
+            .param("creditCardNumber", "5555555555554444")
+            .param("creditCardExpirationDate", "10/21")
+            .param("creditCardValidationValue", "123")
     )
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/"));
@@ -40,17 +40,17 @@ class OrderControllerTest {
   void processTacoOrder_blankName_shouldNotPassValidation() throws Exception {
     mockMvc.perform(
         post("/orders")
-            .param("name", "")
+            .param("recipientName", "")
             .param("street", "address street")
             .param("city", "address city")
             .param("state", "NY")
             .param("zip", "10001")
-            .param("ccNumber", "5555555555554444")
-            .param("ccExpiration", "10/21")
-            .param("ccCVV", "123")
+            .param("creditCardNumber", "5555555555554444")
+            .param("creditCardExpirationDate", "10/21")
+            .param("creditCardValidationValue", "123")
     )
         .andExpect(status().isOk())
         .andExpect(view().name("orderForm"))
-        .andExpect(model().attributeHasFieldErrors("order", "name"));
+        .andExpect(model().attributeHasFieldErrors("order", "recipientName"));
   }
 }

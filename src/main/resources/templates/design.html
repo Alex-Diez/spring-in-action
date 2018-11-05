@@ -48,8 +48,8 @@
         </div>
     </div>
     <div><h3>Name your taco creation:</h3>
-        <input type="text" th:field="*{tacoName}"/>
-        <div th:if="${#fields.hasErrors('tacoName')}" th:errors="*{tacoName}">Name Error</div>
+        <input type="text" th:field="*{name}"/>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
         <br/>
         <button>Submit your taco</button>
     </div>

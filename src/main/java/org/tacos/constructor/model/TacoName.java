@@ -9,7 +9,7 @@ public class TacoName {
   @NotNull
   @Size(
       min = 5,
-      message = "TacoName must be at least 5 characters long"
+      message = "Taco name must be at least 5 characters long"
   )
   private final String value;
 
