@@ -5,13 +5,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Taco {
-  @Valid
-  private TacoName name;
+  @NotNull
+  @Size(
+      min = 5,
+      message = "Taco name must be at least 5 characters long"
+  )
+  private String name;
   @NotNull
   @Size(
       min = 1,
@@ -23,12 +26,8 @@ public class Taco {
     this("");
   }
 
-  public Taco(TacoName name) {
-    this.name = name;
-  }
-
   public Taco(String name) {
-    this(new TacoName(name));
+    this.name = name;
   }
 
   public String getName() {
@@ -40,7 +39,7 @@ public class Taco {
   }
 
   public void setName(String name) {
-    this.name = new TacoName(name);
+    this.name = name;
   }
 
   public void setIngredients(Collection<String> ingredients) {
