@@ -1,5 +1,8 @@
 package org.tacos.oreders.model;
 
+import org.tacos.oreders.port.OrderTransformer;
+import org.tacos.oreders.port.OrderTransformerFactory;
+
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -85,6 +88,19 @@ public class Order {
 
   public void setCreditCardValidationValue(String cardValidationValue) {
     this.creditCard = creditCard.withCardValidationValue(cardValidationValue);
+  }
+
+  public <T> OrderTransformer<T> transformWith(OrderTransformerFactory<T> factory) {
+    return factory.createTransformer(
+        recipientName,
+        address.street(),
+        address.city(),
+        address.state(),
+        address.zip(),
+        creditCard.number(),
+        creditCard.expirationDate(),
+        creditCard.cardValidationValue()
+    );
   }
 
   @Override

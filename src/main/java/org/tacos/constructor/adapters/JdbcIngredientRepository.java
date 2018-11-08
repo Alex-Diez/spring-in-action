@@ -1,6 +1,7 @@
 package org.tacos.constructor.adapters;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.tacos.constructor.model.Ingredient;
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
+@Qualifier("jdbc")
 public class JdbcIngredientRepository implements IngredientRepository {
   private final JdbcTemplate jdbc;
 
