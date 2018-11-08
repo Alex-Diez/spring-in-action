@@ -1,5 +1,8 @@
 package org.tacos.constructor.model;
 
+import org.tacos.constructor.ports.TacoTransformer;
+import org.tacos.constructor.ports.TacoTransformerFactory;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,17 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Taco {
-  @NotNull
-  @Size(
-      min = 5,
-      message = "Taco name must be at least 5 characters long"
-  )
   private String name;
-  @NotNull
-  @Size(
-      min = 1,
-      message = "You must choose at least 1 ingredient"
-  )
   private final List<String> ingredients = new ArrayList<String>();
 
   public Taco() {
@@ -45,6 +38,10 @@ public class Taco {
   public void setIngredients(Collection<String> ingredients) {
     this.ingredients.clear();
     this.ingredients.addAll(ingredients);
+  }
+
+  public <T> TacoTransformer<T> transformationWith(TacoTransformerFactory<T> factory) {
+    return factory.createTransformer(name, new ArrayList<>(ingredients));
   }
 
   @Override
