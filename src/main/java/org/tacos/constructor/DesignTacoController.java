@@ -9,18 +9,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.tacos.constructor.model.Taco;
 import org.tacos.constructor.model.Ingredient;
-import org.tacos.constructor.model.Ingredient.Type;
+import org.tacos.constructor.model.Taco;
 import org.tacos.constructor.ports.IngredientRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import javax.validation.Valid;
@@ -40,8 +34,6 @@ public class DesignTacoController {
 
   @GetMapping
   public String showDesignForm(Model model) {
-//    List<Ingredient> ingredients = new ArrayList<Ingredient>(repository.findAll());
-
     model.addAllAttributes(
         StreamSupport.stream(repository.findAll().spliterator(), false)
             .collect(Collectors.groupingBy(Ingredient::key))
