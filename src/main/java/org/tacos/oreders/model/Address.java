@@ -5,7 +5,6 @@ import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 
 public class Address {
-  @NotBlank(message = "Street is required")
   private final String street;
   @NotBlank(message = "City is required")
   private final String city;

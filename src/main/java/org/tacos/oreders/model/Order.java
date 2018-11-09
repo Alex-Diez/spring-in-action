@@ -6,10 +6,8 @@ import org.tacos.oreders.port.OrderTransformerFactory;
 import java.util.Objects;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 public class Order {
-  @NotBlank(message = "Recipient name is required")
   private String recipientName;
   @Valid
   private Address address;

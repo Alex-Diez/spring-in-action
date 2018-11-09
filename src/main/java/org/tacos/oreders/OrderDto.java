@@ -1,7 +1,11 @@
 package org.tacos.oreders;
 
+import javax.validation.constraints.NotBlank;
+
 public class OrderDto {
+  @NotBlank(message = "Recipient name is required")
   private String recipientName;
+  @NotBlank(message = "Street is required")
   private String street;
   private String city;
   private String state;

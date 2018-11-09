@@ -2,38 +2,46 @@ package org.tako.orders
 
 import org.tacos.oreders.OrderDto
 import org.tacos.oreders.adapters.OrderDtoTransformerFactory
-import org.tacos.oreders.model.Address
-import org.tacos.oreders.model.CreditCard
 import org.tacos.oreders.model.Order
-import spock.lang.Specification
+import org.tako.ValidationSpec
 
-import javax.validation.Validation
-
-class OrderDtoValidationTest extends Specification {
+class OrderDtoValidationTest extends ValidationSpec implements OrderHelper {
 
   def 'order should be valid'() {
-    given: 'order'
-    Order order = new Order("recipient name", address(), creditCard());
+    given: 'valid order dto'
+    Order order = order();
     OrderDto orderDto = order.transformWith(new OrderDtoTransformerFactory()).transform()
-    def factory = Validation.buildDefaultValidatorFactory()
-    def validator = factory.validator
 
-    when:
-    def constraintViolations = validator.validate(orderDto)
+    when: 'valid order transfer object validated'
+    def constraintViolations = validate(orderDto)
 
-    then:
+    then: 'validation set is empty'
     constraintViolations.isEmpty()
   }
 
-  Address address(
-      String street = "address street",
-      String city = "address city",
-      String state = "NY",
-      String zip = "10001") {
-    return new Address(street, city, state, zip);
+  def 'order with blank recipient name is invalid'() {
+    given: 'order dto with blank recipient name'
+    Order order = order(defaults << [recipientName: '']);
+    OrderDto orderDto = order.transformWith(new OrderDtoTransformerFactory()).transform()
+
+    when: 'order transfer object validated'
+    def constraintViolation = validate(orderDto)
+
+    then: 'validation set contains single message about empty name'
+    constraintViolation.size() == 1
+    constraintViolation.contains("Recipient name is required")
   }
 
-  CreditCard creditCard() {
-    return new CreditCard("5555555555554444", "10/21", "123");
+  def 'order with blank recipient street is invalid'() {
+    given: 'order dto with blank recipient street'
+    Order order = order(defaults << [address: address("")]);
+    OrderDto orderDto = order.transformWith(new OrderDtoTransformerFactory()).transform()
+
+    when: 'order transfer object validated'
+    def constraintViolation = validate(orderDto)
+
+    then: 'validation set contains single message about empty street'
+    constraintViolation.size() == 1
+    constraintViolation.contains("Street is required")
   }
 }
