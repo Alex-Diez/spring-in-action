@@ -1,9 +1,9 @@
-package org.tacos.oreders.port;
+package org.tacos.oreders.ports;
 
-import javax.validation.constraints.NotBlank;
+import org.tacos.common.ports.Transformer;
 
 public interface OrderTransformerFactory<T> {
-  OrderTransformer<T> createTransformer(
+  Transformer<T> createTransformer(
       String recipientName,
       String street,
       String city,

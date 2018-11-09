@@ -1,12 +1,12 @@
-package org.tako.orders
+package org.takos.orders
 
+import org.tacos.common.ports.Transformer
 import org.tacos.oreders.OrderDto
 import org.tacos.oreders.adapters.OrderDtoTransformerFactory
 import org.tacos.oreders.model.Address
 import org.tacos.oreders.model.CreditCard
 import org.tacos.oreders.model.Order
-import org.tacos.oreders.port.OrderTransformer
-import org.tacos.oreders.port.OrderTransformerFactory
+import org.tacos.oreders.ports.OrderTransformerFactory
 import spock.lang.Specification
 
 class OrderDtoTransformerTest extends Specification {
@@ -16,7 +16,7 @@ class OrderDtoTransformerTest extends Specification {
     OrderTransformerFactory<OrderDto> factory = new OrderDtoTransformerFactory()
 
     when: 'order transformed with the factory'
-    OrderTransformer<OrderDto> transformer = order.transformWith(factory);
+    Transformer<OrderDto> transformer = order.transformWith(factory);
 
     then: 'transformer create order transfer object'
     OrderDto orderDto = transformer.transform()

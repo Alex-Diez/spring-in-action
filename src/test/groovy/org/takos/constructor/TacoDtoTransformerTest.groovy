@@ -1,9 +1,10 @@
-package org.tako.constructor
+package org.takos.constructor
 
+import org.tacos.common.ports.Transformer
 import org.tacos.constructor.TacoDto
 import org.tacos.constructor.adapters.DtoTacoTransformerFactory
 import org.tacos.constructor.model.Taco
-import org.tacos.constructor.ports.TacoTransformer
+
 import org.tacos.constructor.ports.TacoTransformerFactory
 import spock.lang.Specification
 
@@ -19,7 +20,7 @@ class TacoDtoTransformerTest extends Specification {
     TacoTransformerFactory<TacoDto> factory = new DtoTacoTransformerFactory()
 
     when: 'taco transformed with the factory'
-    TacoTransformer<TacoDto> transformer = taco.transformationWith(factory);
+    Transformer<TacoDto> transformer = taco.transformationWith(factory);
 
     then: 'transformer create taco transfer object'
     TacoDto tacoDto = transformer.transform();

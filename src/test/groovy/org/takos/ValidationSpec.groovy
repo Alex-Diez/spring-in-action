@@ -1,4 +1,4 @@
-package org.tako
+package org.takos
 
 import spock.lang.Specification
 

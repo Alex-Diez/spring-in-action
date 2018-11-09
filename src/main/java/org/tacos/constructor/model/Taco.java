@@ -1,15 +1,12 @@
 package org.tacos.constructor.model;
 
-import org.tacos.constructor.ports.TacoTransformer;
+import org.tacos.common.ports.Transformer;
 import org.tacos.constructor.ports.TacoTransformerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 public class Taco {
   private String name;
@@ -40,7 +37,7 @@ public class Taco {
     this.ingredients.addAll(ingredients);
   }
 
-  public <T> TacoTransformer<T> transformationWith(TacoTransformerFactory<T> factory) {
+  public <T> Transformer<T> transformationWith(TacoTransformerFactory<T> factory) {
     return factory.createTransformer(name, new ArrayList<>(ingredients));
   }
 

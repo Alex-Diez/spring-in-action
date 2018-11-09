@@ -1,17 +1,13 @@
 package org.tacos.oreders.model;
 
-import org.tacos.oreders.port.OrderTransformer;
-import org.tacos.oreders.port.OrderTransformerFactory;
+import org.tacos.common.ports.Transformer;
+import org.tacos.oreders.ports.OrderTransformerFactory;
 
 import java.util.Objects;
 
-import javax.validation.Valid;
-
 public class Order {
   private String recipientName;
-  @Valid
   private Address address;
-  @Valid
   private CreditCard creditCard;
 
   public Order() {
@@ -24,71 +20,39 @@ public class Order {
     this.creditCard = creditCard;
   }
 
-  public String getRecipientName() {
+  public String recipientName() {
     return recipientName;
   }
 
-  public void setRecipientName(String recipientName) {
-    this.recipientName = recipientName;
-  }
-
-  public String getStreet() {
+  public String street() {
     return address != null ? address.street() : "";
   }
 
-  public void setStreet(String street) {
-    address = address.withStreet(street);
-  }
-
-  public String getCity() {
+  public String city() {
     return address != null ? address.city() : "";
   }
 
-  public void setCity(String city) {
-    address = address.withCity(city);
-  }
-
-  public String getState() {
+  public String state() {
     return address != null ? address.state() : "";
   }
 
-  public void setState(String state) {
-    address = address.withState(state);
-  }
-
-  public String getZip() {
+  public String zip() {
     return address != null ? address.zip() : "";
   }
 
-  public void setZip(String zip) {
-    address = address.withZip(zip);
-  }
-
-  public String getCreditCardNumber() {
+  public String creditCardNumber() {
     return creditCard != null ? creditCard.number() : "";
   }
 
-  public void setCreditCardNumber(String creditCardNumber) {
-    this.creditCard = creditCard.withNumber(creditCardNumber);
-  }
-
-  public String getCreditCardExpirationDate() {
+  public String creditCardExpirationDate() {
     return creditCard != null ? creditCard.expirationDate() : "";
   }
 
-  public void setCreditCardExpirationDate(String expirationDate) {
-    this.creditCard = creditCard.withExpiration(expirationDate);
+  public String creditCardValidationValue() {
+    return creditCard != null ? creditCard.validationValue() : "";
   }
 
-  public String getCreditCardValidationValue() {
-    return creditCard != null ? creditCard.cardValidationValue() : "";
-  }
-
-  public void setCreditCardValidationValue(String cardValidationValue) {
-    this.creditCard = creditCard.withCardValidationValue(cardValidationValue);
-  }
-
-  public <T> OrderTransformer<T> transformWith(OrderTransformerFactory<T> factory) {
+  public <T> Transformer<T> transformWith(OrderTransformerFactory<T> factory) {
     return factory.createTransformer(
         recipientName,
         address.street(),
@@ -97,7 +61,7 @@ public class Order {
         address.zip(),
         creditCard.number(),
         creditCard.expirationDate(),
-        creditCard.cardValidationValue()
+        creditCard.validationValue()
     );
   }
 
@@ -106,21 +70,21 @@ public class Order {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Order order = (Order) o;
-    return Objects.equals(getRecipientName(), order.getRecipientName()) &&
+    return Objects.equals(recipientName(), order.recipientName()) &&
         Objects.equals(address, order.address) &&
-        Objects.equals(getCreditCardNumber(), order.getCreditCardNumber()) &&
-        Objects.equals(getCreditCardExpirationDate(), order.getCreditCardExpirationDate()) &&
-        Objects.equals(getCreditCardValidationValue(), order.getCreditCardValidationValue());
+        Objects.equals(creditCardNumber(), order.creditCardNumber()) &&
+        Objects.equals(creditCardExpirationDate(), order.creditCardExpirationDate()) &&
+        Objects.equals(creditCardValidationValue(), order.creditCardValidationValue());
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        getRecipientName(),
+        recipientName(),
         address,
-        getCreditCardNumber(),
-        getCreditCardExpirationDate(),
-        getCreditCardValidationValue()
+        creditCardNumber(),
+        creditCardExpirationDate(),
+        creditCardValidationValue()
     );
   }
 

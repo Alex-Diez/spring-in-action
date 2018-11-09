@@ -6,11 +6,8 @@ import javax.validation.constraints.NotBlank;
 
 public class Address {
   private final String street;
-  @NotBlank(message = "City is required")
   private final String city;
-  @NotBlank(message = "State is required")
   private final String state;
-  @NotBlank(message = "Zip code is required")
   private final String zip;
 
   public Address(String street, String city, String state, String zip) {

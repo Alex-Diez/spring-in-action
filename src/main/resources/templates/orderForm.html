@@ -38,7 +38,7 @@
           th:if="${#fields.hasErrors('creditCardNumber')}"
           th:errors="*{creditCardNumber}">CC Number Error</span>
     <br/>
-    <label for="expirationDate">Expiration: </label>
+    <label for="cardExpirationDate">Expiration: </label>
     <input type="text" th:field="*{creditCardExpirationDate}"/>
     <br/>
     <label for="cardValidationValue">CVV: </label>

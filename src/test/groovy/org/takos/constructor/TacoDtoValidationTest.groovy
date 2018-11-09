@@ -1,8 +1,8 @@
-package org.tako.constructor
+package org.takos.constructor
 
 import org.tacos.constructor.TacoDto
 import org.tacos.constructor.model.Ingredient
-import org.tako.ValidationSpec
+import org.takos.ValidationSpec
 
 class TacoDtoValidationTest extends ValidationSpec {
 
