@@ -1,38 +1,49 @@
-create table if not exists Ingredient (
-  id varchar(4) not null,
-  name varchar(25) not null,
-  type varchar(10) not null
+create table if not exists INGREDIENT (
+  ID   varchar(4)  not null,
+  NAME varchar(25) not null,
+  TYPE varchar(10) not null
 );
-create table if not exists Taco (
-  id identity,
-  name varchar(50) not null,
-  createdAt timestamp not null
+
+create table if not exists TACO (
+  ID         varchar(36),
+  NAME       varchar(50) not null,
+  CREATED_AT timestamp   not null
 );
-create table if not exists Taco_Ingredients (
-  taco bigint not null,
-  ingredient varchar(4) not null
+
+create table if not exists TACO_INGREDIENTS (
+  TACO_ID       varchar(36) not null,
+  INGREDIENT_ID varchar(4)  not null
 );
-alter table Taco_Ingredients
-    add foreign key (taco) references Taco(id);
-alter table Taco_Ingredients
-    add foreign key (ingredient) references Ingredient(id);
-create table if not exists Taco_Order (
-  id identity,
-    deliveryName varchar(50) not null,
-    deliveryStreet varchar(50) not null,
-    deliveryCity varchar(50) not null,
-    deliveryState varchar(2) not null,
-    deliveryZip varchar(10) not null,
-    ccNumber varchar(16) not null,
-    ccExpiration varchar(5) not null,
-    ccCVV varchar(3) not null,
-    placedAt timestamp not null
+
+alter table TACO_INGREDIENTS
+  add foreign key (TACO_ID) references TACO (ID);
+
+alter table TACO_INGREDIENTS
+  add foreign key (INGREDIENT_ID) references INGREDIENT (ID);
+
+alter table TACO_INGREDIENTS
+  add unique (TACO_ID, INGREDIENT_ID) check;
+
+create table if not exists TACO_ORDER (
+  ID                           identity,
+  RECIPIENT_NAME               varchar(50) not null,
+  RECIPIENT_STREET             varchar(50) not null,
+  RECIPIENT_CITY               varchar(50) not null,
+  RECIPIENT_STATE              varchar(2)  not null,
+  RECIPIENT_ZIP                varchar(10) not null,
+  CREDIT_CARD_NUMBER           varchar(16) not null,
+  CREDIT_CARD_EXPIRATION_DATE  varchar(5)  not null,
+  CREDIT_CARD_VALIDATION_VALUE varchar(3)  not null,
+  PLACED_AT                    timestamp   not null
 );
-create table if not exists Taco_Order_Tacos (
-  tacoOrder bigint not null,
-  taco bigint not null
+
+create table if not exists TACO_ORDER_TACOS (
+  ORDER_ID bigint not null,
+  TACO_ID  bigint not null
 );
-alter table Taco_Order_Tacos
-    add foreign key (tacoOrder) references Taco_Order(id);
-alter table Taco_Order_Tacos
-    add foreign key (taco) references Taco(id);
+
+alter table TACO_ORDER_TACOS
+  add foreign key (ORDER_ID) references TACO_ORDER (ID);
+
+alter table TACO_ORDER_TACOS
+  add foreign key (TACO_ID) references TACO (ID);

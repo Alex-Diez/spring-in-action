@@ -10,7 +10,7 @@ import spock.mock.DetachedMockFactory
 class ControllerSpec extends Specification {
 
   @TestConfiguration
-  static class Conf {
+  static class ControllerConfiguration {
     DetachedMockFactory mockFactory = new DetachedMockFactory();
 
     @Bean

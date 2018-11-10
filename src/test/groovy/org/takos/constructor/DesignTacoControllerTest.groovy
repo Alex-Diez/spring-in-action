@@ -25,32 +25,46 @@ class DesignTacoControllerTest extends ControllerSpec {
     then:
     actions
         .andExpect(status().isOk())
-        .andExpect(view().name("design"))
+        .andExpect(view().name('design'))
   }
 
   def 'should create taco order'() {
     when:
-    ResultActions actions = mockMvc.perform(post("/design").param("name", "new taco").param("ingredients", "FLTO"));
+    ResultActions actions = mockMvc.perform(post('/design').param('name', 'new taco').param('ingredients', 'FLTO'));
 
     then:
     actions
         .andExpect(status().is3xxRedirection())
-        .andExpect(redirectedUrlTemplate("/orders/current"))
-        .andExpect(view().name("redirect:/orders/current"))
+        .andExpect(redirectedUrlTemplate('/orders/current'))
+        .andExpect(view().name('redirect:/orders/current'))
   }
 
   def 'create taco order short name should not pass validation'() {
     when:
     ResultActions actions = mockMvc.perform(
-        post("/design")
-            .param("name", "shrt")
-            .param("ingredients", "FLTO")
+        post('/design')
+            .param('name', 'shrt')
+            .param('ingredients', 'FLTO')
     )
 
     then:
     actions
         .andExpect(status().isOk())
-        .andExpect(view().name("design"))
-        .andExpect(model().attributeHasFieldErrors("taco", "name"));
+        .andExpect(view().name('design'))
+        .andExpect(model().attributeHasFieldErrors('taco', 'name'));
+  }
+
+  def 'create taco order without ingredients'() {
+    when:
+    ResultActions actions = mockMvc.perform(
+        post('/design')
+            .param('name', 'new taco')
+    )
+
+    then:
+    actions
+        .andExpect(status().isOk())
+        .andExpect(view().name('design'))
+        .andExpect(model().attributeHasFieldErrors('taco', 'ingredients'))
   }
 }

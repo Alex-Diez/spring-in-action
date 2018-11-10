@@ -13,15 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.tacos.constructor.model.Ingredient;
-import org.tacos.constructor.model.Taco;
 import org.tacos.constructor.ports.IngredientRepository;
 
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import javax.validation.Valid;
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
 
 @Controller
 @RequestMapping("/design")
