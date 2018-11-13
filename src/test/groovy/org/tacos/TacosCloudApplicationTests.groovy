@@ -1,7 +1,6 @@
-package org.takos
+package org.tacos
 
 import org.springframework.boot.test.context.SpringBootTest
-import org.tacos.TacosCloudApplication
 import spock.lang.Specification
 
 @SpringBootTest(classes = [TacosCloudApplication])

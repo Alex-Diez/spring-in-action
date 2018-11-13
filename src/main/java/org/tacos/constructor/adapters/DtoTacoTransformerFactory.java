@@ -1,7 +1,7 @@
 package org.tacos.constructor.adapters;
 
 import org.tacos.common.ports.Transformer;
-import org.tacos.constructor.TacoDto;
+import org.tacos.constructor.domain.dto.TacoDto;
 import org.tacos.constructor.ports.TacoTransformerFactory;
 
 import java.util.List;

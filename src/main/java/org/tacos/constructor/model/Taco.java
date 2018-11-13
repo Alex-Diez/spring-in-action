@@ -3,6 +3,7 @@ package org.tacos.constructor.model;
 import org.tacos.common.ports.Transformer;
 import org.tacos.constructor.ports.TacoTransformerFactory;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,11 +12,30 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class Taco {
-  private final String id;
-  private final String name;
-  private final LocalDateTime createdAt;
-  private final Set<Ingredient> receipt;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TACO")
+@Access(AccessType.FIELD)
+public class Taco implements Serializable {
+  @Id
+  @Column(name = "ID")
+  private String id;
+  @Column(name = "NAME")
+  private String name;
+  @Column(name = "CREATED_AT")
+  private LocalDateTime createdAt;
+  @OneToMany(targetEntity = Ingredient.class)
+  private Set<Ingredient> receipt;
+
+  private Taco() {
+  }
 
   public static String generateNextId() {
     return UUID.randomUUID().toString();
@@ -49,7 +69,7 @@ public class Taco {
   }
 
   public <T> Transformer<T> transformationWith(TacoTransformerFactory<T> factory) {
-    return factory.createTransformer(name, receipt.stream().map(Ingredient::getName).collect(Collectors.toList()));
+    return factory.createTransformer(name, receipt.stream().map(Ingredient::name).collect(Collectors.toList()));
   }
 
   @Override

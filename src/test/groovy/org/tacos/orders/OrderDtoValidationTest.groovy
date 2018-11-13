@@ -1,9 +1,9 @@
-package org.takos.orders
+package org.tacos.orders
 
+import org.tacos.ValidationSpec
 import org.tacos.oreders.OrderDto
 import org.tacos.oreders.adapters.OrderDtoTransformerFactory
 import org.tacos.oreders.ports.OrderTransformerFactory
-import org.takos.ValidationSpec
 
 class OrderDtoValidationTest extends ValidationSpec implements OrderHelper {
   private final OrderTransformerFactory<OrderDto> factory = new OrderDtoTransformerFactory()

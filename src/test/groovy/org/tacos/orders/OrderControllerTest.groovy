@@ -1,23 +1,21 @@
-package org.takos.orders
-
+package org.tacos.orders
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
+import org.tacos.ControllerConfiguration
 import org.tacos.oreders.OrderController
 import org.tacos.oreders.OrderDto
-import org.takos.ControllerSpec
+import spock.lang.Specification
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
-@ContextConfiguration(classes = [OrderController])
+@ContextConfiguration(classes = [OrderController, ControllerConfiguration])
 @WebMvcTest(controllers = [OrderController])
-class OrderControllerTest extends ControllerSpec {
+class OrderControllerTest extends Specification {
   @Autowired
   private MockMvc mockMvc;
 

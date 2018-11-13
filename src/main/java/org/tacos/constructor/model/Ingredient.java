@@ -1,9 +1,28 @@
 package org.tacos.constructor.model;
 
-public class Ingredient {
-  private final String id;
-  private final String name;
-  private final Type type;
+import java.io.Serializable;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "INGREDIENT")
+@Access(AccessType.FIELD)
+public class Ingredient implements Serializable {
+  @Id
+  @Column(name = "ID")
+  private String id;
+  @Column(name = "NAME")
+  private String name;
+  @Column(name = "TYPE")
+  private Type type;
+
+  private Ingredient() {
+  }
 
   public Ingredient(String id, String name, Type type) {
     this.id = id;
@@ -12,18 +31,18 @@ public class Ingredient {
   }
 
   public String key() {
-    return getType().toString().toLowerCase();
+    return type().toString().toLowerCase();
   }
 
-  public String getId() {
+  public String id() {
     return id;
   }
 
-  public String getName() {
+  public String name() {
     return name;
   }
 
-  public Type getType() {
+  public Type type() {
     return type;
   }
 

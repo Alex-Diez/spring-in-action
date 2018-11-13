@@ -1,19 +1,19 @@
-package org.takos
+package org.tacos
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
-import org.tacos.TacosCloudApplication
+import spock.lang.Specification
 
 import static org.hamcrest.Matchers.containsString
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
 @WebMvcTest
-@ContextConfiguration(classes = TacosCloudApplication)
-class HomeControllerTest extends ControllerSpec {
+@ContextConfiguration(classes = [TacosCloudApplication, ControllerConfiguration])
+class HomeControllerTest extends Specification {
   @Autowired
   private MockMvc mockMvc;
 

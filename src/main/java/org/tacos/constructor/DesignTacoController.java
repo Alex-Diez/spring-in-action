@@ -3,7 +3,6 @@ package org.tacos.constructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,8 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.tacos.constructor.domain.dto.TacoDto;
 import org.tacos.constructor.model.Ingredient;
-import org.tacos.constructor.ports.IngredientRepository;
+import org.tacos.constructor.ports.TacoRepository;
 
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -26,10 +26,10 @@ import javax.validation.Valid;
 public class DesignTacoController {
   private static final Logger log = LoggerFactory.getLogger(DesignTacoController.class);
 
-  private final IngredientRepository repository;
+  private final TacoRepository repository;
 
   @Autowired
-  public DesignTacoController(@Qualifier("jdbc") IngredientRepository repository) {
+  public DesignTacoController(TacoRepository repository) {
     this.repository = repository;
   }
 
@@ -41,7 +41,7 @@ public class DesignTacoController {
   @GetMapping
   public String showDesignForm(Model model) {
     model.addAllAttributes(
-        StreamSupport.stream(repository.findAll().spliterator(), false)
+        StreamSupport.stream(repository.findAllIngredients().spliterator(), false)
             .collect(Collectors.groupingBy(Ingredient::key))
     );
     return "design";

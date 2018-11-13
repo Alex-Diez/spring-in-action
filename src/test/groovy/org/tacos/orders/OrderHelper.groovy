@@ -1,4 +1,4 @@
-package org.takos.orders
+package org.tacos.orders
 
 import org.tacos.oreders.model.Address
 import org.tacos.oreders.model.CreditCard

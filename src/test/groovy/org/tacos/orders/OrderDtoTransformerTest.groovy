@@ -1,4 +1,4 @@
-package org.takos.orders
+package org.tacos.orders
 
 import org.tacos.common.ports.Transformer
 import org.tacos.oreders.OrderDto
@@ -11,11 +11,11 @@ import spock.lang.Specification
 
 class OrderDtoTransformerTest extends Specification {
   def 'should transform order to transfer object'() {
-    given: 'order and transformer factory'
+    given: 'order and transformer em'
     Order order = new Order('recipient name', address(), creditCard());
     OrderTransformerFactory<OrderDto> factory = new OrderDtoTransformerFactory()
 
-    when: 'order transformed with the factory'
+    when: 'order transformed with the em'
     Transformer<OrderDto> transformer = order.transformWith(factory);
 
     then: 'transformer create order transfer object'

@@ -1,4 +1,4 @@
-package org.tacos.constructor;
+package org.tacos.constructor.domain.dto;
 
 import java.util.ArrayList;
 import java.util.List;
